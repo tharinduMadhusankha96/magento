@@ -1,0 +1,77 @@
+<?php
+/** @var $block \Inchoo\Helloworld\Block */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$model=$objectManager->create('Inchoo\Helloworld\Model\Post');
+$datacollection =$model->getCollection();
+?>
+<div class="table-wrapper orders-history">
+    <table class="data table table-order-items history" id="my-orders-table">
+        <caption class="table-caption"><?php echo __('Grid Record') ?></caption>
+<thead>
+<tr>
+    <th scope="col" class="col id"><?php echo __('ID') ?></th>
+    <th scope="col" class="col name"><?php echo __('First Name') ?></th>
+    <th scope="col" class="col name"><?php echo __('Last Name') ?></th>
+    <th scope="col" class="col telephone"><?php echo __('Telephone') ?></th>
+    <th scope="col" class="col email"><?php echo __('Email') ?></th>
+    <th scope="col" class="col name"><?php echo __('Gpa') ?></th>
+    <th scope="col" class="col name"><?php echo __('Status') ?></th>
+    <th scope="col" class="col name"><?php echo __('Created_At') ?></th>
+    <th scope="col" class="col action"><?php echo __('Action') ?></th>
+</tr>
+</thead>
+<tbody>
+<?php
+foreach ($datacollection as $item): ?>
+    <tr>
+        <td data-th="<?= $block->escapeHtml(__('ID')) ?>" class="col id">
+            <?php echo $item->getId() ?>
+        </td>
+        <td data-th="<?= $block->escapeHtml(__('First Name')) ?>" class="col name">
+            <?php echo $item->getFirstName() ?>
+        </td>
+        <td data-th="<?= $block->escapeHtml(__('Last Name')) ?>" class="col name">
+            <?php echo $item->getLastName() ?>
+        </td>
+        <td data-th="<?= $block->escapeHtml(__('Telephone')) ?>" class="col telephone">
+            <?php echo $item->getContactNumber() ?>
+        </td>
+        <td data-th="<?= $block->escapeHtml(__('Email')) ?>" class="col email">
+            <?php echo $item->getEmail() ?>
+        </td>
+        <td data-th="<?= $block->escapeHtml(__('Gpa')) ?>" class="col name">
+            <?php echo $item->getCurrentGpa() ?>
+        </td>
+        <td data-th="<?= $block->escapeHtml(__('Status')) ?>" class="col name">
+            <?php echo $item->getStatus() ?>
+        </td>
+        <td data-th="<?= $block->escapeHtml(__('Created At')) ?>"
+            class="col title"><?php echo date('Y-m-d', strtotime($item->getCreatedAt())); ?>
+        </td>
+        <td>
+            <div class="customer-welcome">
+                <button
+                    data-mage-init='{"dropdown":{}}'
+                    data-toggle="dropdown"
+                    class="action"
+                    data-action="customer-menu-toggle">
+                    <span><?= $block->escapeHtml(__('Edit/Delete')) ?></span>
+                </button>
+                <ul data-target="dropdown" class="dropdown-options">
+                    <li data-th="<?= $block->escapeHtml(__('Action')) ?>" class="col delete">
+                        <a href="<?php echo $block->getDeleteAction() . 'id/' . $item->getId(); ?>"><?php echo __('Delete') ?></a>
+                    </li>
+                    <li data-th="<?= $block->escapeHtml(__('Action')) ?>" class="col delete">
+                         <a href="<?php echo $block->getEditAction() . 'id/' . $item->getId(); ?>"><?php echo __('Edit') ?></a>
+                    </li>
+                </ul>
+            </div>
+
+        </td>
+    </tr>
+<?php endforeach; ?>
+</tbody>
+</table>
+</div>
+

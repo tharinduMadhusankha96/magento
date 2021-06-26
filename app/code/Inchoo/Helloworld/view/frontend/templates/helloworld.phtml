@@ -1,0 +1,100 @@
+<?php
+/** @var $block \Inchoo\Helloworld\Block */
+$data = $block->getAllData();
+$first_name = '';
+$last_name = '';
+$contact_number = '';
+$email = '';
+$current_gpa = '';
+$status = '';
+if ($data->getId()) {
+    $first_name = $data->getFirstName();
+    $last_name = $data ->getLastName();
+    $contact_number = $data -> getContactNumber();
+    $email = $data->getEmail();
+    $current_gpa = $data -> getCurrentGpa();
+    $status = $data -> getStatus();
+}
+?>
+<div class="row">
+    <div class="col-md-8">
+        <form name="addData" method="post" id="addData" class="form"
+              action="<?php echo $this->getFormAction(); ?>"
+              data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+              data-mage-init='{"validation":{}}'>
+            <fieldset class="fieldset">
+                <legend class="legend"><span><?= $block->escapeHtmlAttr(__('Update Detail')) ?></span></legend>
+                <fieldset class="fieldset row">
+                    <?php
+                    if ($data->getId()) {
+                        ?>
+                        <input type="hidden" name="id" value="<?php echo $data->getId(); ?>">
+                        <?php
+                    } ?>
+                    <div class="fields col-md-6">
+                        <div class="field name required">
+                            <label class="label" for="title"><span><?= $block->
+                                    escapeHtmlAttr(__('First Name')) ?></span></label>
+                            <div class="control">
+                                <input name="first_name" id="first_name" title="First Name" value="<?php echo $first_name ?>" class="input-text"
+                                       type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="title"><span><?= $block->
+                                    escapeHtmlAttr(__('Last Name')) ?></span></label>
+                            <div class="control">
+                                <input name="last_name" id="last_name" title="Last Name" value="<?php echo $last_name ?>" class="input-text"
+                                       type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="title"><span><?= $block->escapeHtmlAttr(__('Contact Number')) ?></span></label>
+                            <div class="control">
+                                <input name="contact_number" id="contact_number" title="Contact Number"
+                                       value="<?php echo $contact_number; ?>" class="input-text"
+                                       type="text" data-validate="{required:true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="title"><span><?= $block->
+                                    escapeHtmlAttr(__('Email')) ?></span></label>
+                            <div class="control">
+                                <input name="email" id="email" title="Email" value="<?php echo $email; ?>"
+                                       class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-email':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="title"><span><?= $block->
+                                    escapeHtmlAttr(__('Current Gpa')) ?></span></label>
+                            <div class="control">
+                                <input name="current_gpa" id="current_gpa" title="Current Gpa" value="<?php echo $current_gpa ?>" class="input-text"
+                                       type="number"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="title"><span><?= $block->
+                                    escapeHtmlAttr(__('Status')) ?></span></label>
+                            <div class="control">
+                                <input name="status" id="status" title="Status" value="<?php echo $status ?>" class="input-text"
+                                       type="number"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="submit" class="action submit primary" title="Save"><span><?= $block->
+                            escapeHtmlAttr(__('Save')) ?></span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
